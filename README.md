@@ -1,6 +1,7 @@
 # YOLOv8-Face ONNX Inference
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/yakhyo/yolov8-face-onnx-inference)
+[![Downloads](https://img.shields.io/github/downloads/yakhyo/yolov8-face-onnx-inference/total)](https://github.com/yakhyo/yolov8-face-onnx-inference/releases)
 [![GitHub License](https://img.shields.io/github/license/yakhyo/yolov8-face-onnx-inference)](https://github.com/yakhyo/yolov8-face-onnx-inference/blob/main/LICENSE)
 
 Face detection with 5 facial landmarks using YOLOv8-Face ONNX Runtime inference.
