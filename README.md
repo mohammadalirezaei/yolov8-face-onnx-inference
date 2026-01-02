@@ -44,10 +44,10 @@ bash download.sh yolov8n-face   # Nano model
 
 ### Model Performance
 
-| Model         | Test Size | Easy | Medium | Hard | Model Size |
-| ------------- | --------- | ---- | ------ | ---- | ---------- |
-| yolov8-lite-s | 640       | 93.4 | 91.2   | 78.6 | 7.4 MB     |
-| yolov8n       | 640       | 94.6 | 92.3   | 79.6 | 12 MB      |
+| Model         | Test Size | Easy | Medium | Hard | Model Size | Download |
+| ------------- | --------- | ---- | ------ | ---- | ---------- | -------- |
+| yolov8-lite-s | 640       | 93.4 | 91.2   | 78.6 | 7.4 MB     | [link](https://github.com/yakhyo/yolov8-face-onnx-inference/releases/download/weights/yolov8-lite-s.onnx) |
+| yolov8n       | 640       | 94.6 | 92.3   | 79.6 | 12 MB      | [link](https://github.com/yakhyo/yolov8-face-onnx-inference/releases/download/weights/yolov8n-face.onnx) |
 
 - **Easy/Medium/Hard**: mAP on WIDERFace validation subsets
 - **yolov8-lite-s**: Lightweight model for resource-constrained applications
