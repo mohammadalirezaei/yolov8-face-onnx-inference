@@ -93,15 +93,15 @@ def run_face_detection(
         frame_idx += 1
 
         # Preprocess
-        img, scale, (dw, dh) = letterbox(frame, target_shape=(640, 640))
+        img, scale, (dw, dh) = letterbox(frame, target_shape=model.img_size)
 
         # Inference
         boxes, scores, landmarks = model(img)
 
         # Scale coordinates back to original image
         if len(boxes) > 0:
-            boxes = scale_boxes((640, 640), boxes, frame.shape[:2])
-            landmarks = scale_landmarks((640, 640), landmarks, frame.shape[:2])
+            boxes = scale_boxes(model.img_size, boxes, frame.shape[:2])
+            landmarks = scale_landmarks(model.img_size, landmarks, frame.shape[:2])
 
             # Draw detections
             for box, score, lm in zip(boxes, scores, landmarks):

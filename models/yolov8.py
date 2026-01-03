@@ -18,7 +18,6 @@ class YOLOv8Face:
         model_path: str,
         conf_thres: float = 0.25,
         iou_thres: float = 0.45,
-        img_size: int = 640,
         max_det: int = 300,
         nms_mode: str = "torchvision",
     ) -> None:
@@ -28,25 +27,15 @@ class YOLOv8Face:
             model_path (str): Path to ONNX model file
             conf_thres (float, optional): Confidence threshold for detections. Defaults to 0.25.
             iou_thres (float, optional): IoU threshold for NMS. Defaults to 0.45.
-            img_size (int, optional): Input image size. Defaults to 640.
             max_det (int, optional): Maximum number of detections. Defaults to 300.
             nms_mode (str, optional): NMS calculation method ('torchvision', 'numpy'). Defaults to 'torchvision'.
         """
         self.conf_thres = conf_thres
         self.iou_thres = iou_thres
-        self.img_size = img_size
         self.max_det = max_det
-
-        # Timing attributes
-        self.dt = [0.0, 0.0, 0.0]  # preprocess, inference, postprocess times
-
-        if self.img_size != 640:
-            raise ValueError("Only 640x640 input size is supported.")
-
-        # Set NMS mode
         self.nms_mode = nms_mode
 
-        # Initialize model
+        # Initialize model (sets self.img_size from ONNX input shape)
         self._initialize_model(model_path)
 
     def __call__(self, image: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -89,6 +78,10 @@ class YOLOv8Face:
             # Get model info
             self.output_names = [x.name for x in self.session.get_outputs()]
             self.input_names = [x.name for x in self.session.get_inputs()]
+
+            # Get input shape from model (e.g., [1, 3, 640, 640])
+            input_shape = self.session.get_inputs()[0].shape
+            self.img_size = (input_shape[2], input_shape[3])  # (H, W)
 
             # Get model metadata
             meta = self.session.get_modelmeta()
